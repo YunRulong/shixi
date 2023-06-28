@@ -1,0 +1,6 @@
+{
+  "watch": ["doc"],
+  "ext": "js,json",
+  "ignore": ["src/public"]
+}
+

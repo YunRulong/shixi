@@ -1,0 +1,11 @@
+open ai
+
+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
+
+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
+
+pipecone
+
+us-west1-gcp-free
+
+ef290d5e-6993-4ed4-a180-700f974fd3b6
