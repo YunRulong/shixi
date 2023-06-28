@@ -10,6 +10,11 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const { uuid, question, history } = req.body;
+  //聲明pinecone_name_space
+  let pinecone_name_space=""
+  pinecone_name_space=PINECONE_NAME_SPACE
+  if(uuid!=""&&uuid!=null)pinecone_name_space=uuid
+
   console.log('uuid', uuid);
   console.log('question', question);
 
@@ -34,8 +39,8 @@ export default async function handler(
       {
         pineconeIndex: index,
         textKey: 'text',
-        namespace: PINECONE_NAME_SPACE, //namespace comes from your config folder
-      },
+        namespace: pinecone_name_space, //namespace comes from your config folder
+      },//為替換UUID,插入中間變量
     );
 
     //create chain
