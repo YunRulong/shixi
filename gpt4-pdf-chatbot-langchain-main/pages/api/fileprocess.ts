@@ -11,9 +11,9 @@ export default async function handler(
 ) {
     try {
         const myresponse = 'xzwhhh';
-
+        const {uuid} = req.body;
         await (async () => {
-            await run();
+            await run(uuid);
             console.log('ingestion complete');
         })();
 

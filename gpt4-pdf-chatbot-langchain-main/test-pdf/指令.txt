@@ -14,9 +14,9 @@ $headers = @{
     "Content-Type" = "application/json"
 }
 $body = @{
-    "question" = "who is xzw"
+    "question" = "who is jerry"
     "history" = "Chat History"
-    "uuid" = "T"
+    "uuid" = "1001"
 } | ConvertTo-Json
 
 $response = Invoke-RestMethod -Uri $url -Method POST -Headers $headers -Body $body
