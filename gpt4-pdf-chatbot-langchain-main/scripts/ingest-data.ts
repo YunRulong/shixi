@@ -5,12 +5,18 @@ import { pinecone } from '@/utils/pinecone-client';
 import { CustomPDFLoader } from '@/utils/customPDFLoader';
 import { PINECONE_INDEX_NAME, PINECONE_NAME_SPACE } from '@/config/pinecone';
 import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
-
 /* Name of directory to retrieve your files from */
+//這裏添加一個用來劃分上傳pdf的程序，按組長要求，放在根目錄裏
+
 const filePath = 'docs';
 
-export const run = async () => {
+export const run = async (uuid?:string) => {
   try {
+    let pine_conne_space=PINECONE_NAME_SPACE
+    if(uuid!=""&&uuid!=null)
+    {
+      pine_conne_space=uuid
+    }
     /*load raw docs from the all files in the directory */
     const directoryLoader = new DirectoryLoader(filePath, {
       '.pdf': (path) => new CustomPDFLoader(path),
@@ -36,7 +42,7 @@ export const run = async () => {
     //embed the PDF documents
     await PineconeStore.fromDocuments(docs, embeddings, {
       pineconeIndex: index,
-      namespace: PINECONE_NAME_SPACE,
+      namespace: pine_conne_space,
       textKey: 'text',
     });
   } catch (error) {

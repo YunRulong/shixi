@@ -1,0 +1,33 @@
+yarn run ingest 語料上傳
+
+yarn run dev 啓動對話系統（http://localhost:3000）//調試運行
+
+yarn run build //生成
+
+yarn run start //運行
+
+yarn install//本地部署
+
+//測試問答
+$url = "http://127.0.0.1:3000/api/chat"
+$headers = @{
+    "Content-Type" = "application/json"
+}
+$body = @{
+    "question" = "who is jerry"
+    "history" = "Chat History"
+    "uuid" = "1001"
+} | ConvertTo-Json
+
+$response = Invoke-RestMethod -Uri $url -Method POST -Headers $headers -Body $body
+
+//測試上傳
+$url = "http://127.0.0.1:3000/api/fileprocess"
+$headers = @{
+    "Content-Type" = "application/json"
+}
+$body = @{
+    "uuid" = "1001"
+} | ConvertTo-Json
+
+Invoke-RestMethod -Method POST -Uri $url -Headers $headers -Body $body
