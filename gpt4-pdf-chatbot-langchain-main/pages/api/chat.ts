@@ -89,7 +89,7 @@ export const getPdfName = async (uuid:string,datas: Array<string>=[]):Promise<Ar
     const que = await index.query(qu)
     que.results?.map((result) => result.matches?.map((result)=>{if(result.metadata)if("source" in result.metadata)if(typeof(result.metadata.source)=='string')datas.push(result.metadata.source);}))
     const tdata:Array<string>=[]
-    datas.map((na)=>{tdata.push(na.split(new RegExp('\\\\'))[na.split(new RegExp('\\\\')).length-1]);})
+    datas.map((na)=>{tdata.push(na.split(new RegExp('\\\\|/'))[na.split(new RegExp('\\\\|/')).length-1]);})
     datas=tdata;
     //console.log('response', response);
   } catch (error) {
