@@ -21,7 +21,7 @@ import { timeLog } from 'console';
 export class PiDatabase
 {
 
-    static March = async (role:string,key:string="",limit:number=10000,datas: Array<any>=[]):Promise<Array<any>>=> {
+    static March = async (role:string,key:string="",targetvector:Array<number>=Array<number>(1536).fill(0),limit:number=10000,datas: Array<any>=[]):Promise<Array<any>>=> {
         //role角色名
         //limit匹配數，上限10000
         //datas用於存返回值的參數，勿填
@@ -34,7 +34,7 @@ export class PiDatabase
         try {
             const index = pinecone.Index(PINECONE_INDEX_NAME);// 从松果（pinecone）获取对应的索引区域
             const val: QueryVector={
-            values: Array<number>(1536).fill(0) // 创建一个长度为 1536 的数组并填充为 0，作为 QueryVector 对象的 values 属性
+            values: targetvector // 创建一个长度为 1536 的数组并填充为 0，作为 QueryVector 对象的 values 属性
             }
             const arr:Array<QueryVector>=[val]// 创建一个包含上面创建的 QueryVector 对象的数组
             const quu: QueryRequest={
