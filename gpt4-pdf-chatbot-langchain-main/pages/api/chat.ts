@@ -29,7 +29,7 @@ export default async function handler(
   //let red: Array<PiRecord>=[];
   //for(let i=0;i<20;i++){red.push(new PiRecord("湯姆"+i,"這是第"+i+"個我說的話"))}
   //PiDatabase.BatchCreat("ERROR",red);
-  PiDatabase.March("ERROR","role").then((name)=>{console.log("ans:\n",name)}).catch((error)=>{console.log(error)});
+  //PiDatabase.March("ERROR","role").then((name)=>{console.log("ans:\n",name)}).catch((error)=>{console.log(error)});
   ////////////////////////////////////////////////////////////////////////////
   //only accept post requests
   if (req.method !== 'POST') {

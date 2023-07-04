@@ -99,6 +99,30 @@ export class PiDatabase
         throw new Error('Failed to creat your data');
         }
     };
+    static Delete = async (role:string,id:string[])=> {
+        let pinecone_name_space=""// 声明 pinecone_name_space，用于存储命名空间名字
+        // 避免誤刪，不取默认值
+        if(role!=""&&role!=null)pinecone_name_space=role// 输入非空则使用输入值作为命名空间名字
+        
+        try {
+            const val: QueryVector={
+                values: Array<number>(1536).fill(0) // 创建一个长度为 1536 的数组并填充为 0，作为 QueryVector 对象的 values 属性
+            }
+                const arr:Array<QueryVector>=[val]// 创建一个包含上面创建的 QueryVector 对象的数组
+                const quu: DeleteRequest={
+                ids:id,
+                deleteAll:false,
+                namespace: pinecone_name_space,// 设置命名空间名字
+            };
+            const index = pinecone.Index(PINECONE_INDEX_NAME);// 从松果（pinecone）获取对应的索引区域
+            await index.delete1(quu)// 发送查询请求并等待返回结果
+            console.log('delete record successed');
+
+        } catch (error) {
+            console.log('error', error);
+            throw new Error('Failed to delete record ');// 抛出异常，提示获取数据失败
+        }
+    };
     static BatchCreat = async (role:string="",record:Array<PiRecord>) => {
     try {
     
@@ -127,10 +151,6 @@ export class PiDatabase
             }
     };
     static DeleteNameSpace = async (role:string)=> {
-        //role角色名
-        //limit匹配數，上限10000
-        //datas用於存返回值的參數，勿填
-        //matedata裏的對應字段
         let pinecone_name_space=""// 声明 pinecone_name_space，用于存储命名空间名字
         // 避免誤刪，不取默认值
         if(role!=""&&role!=null)pinecone_name_space=role// 输入非空则使用输入值作为命名空间名字
@@ -146,13 +166,13 @@ export class PiDatabase
             };
             const index = pinecone.Index(PINECONE_INDEX_NAME);// 从松果（pinecone）获取对应的索引区域
             await index.delete1(quu)// 发送查询请求并等待返回结果
+            console.log('delete namespace: "'+ role+'" successed');
 
         } catch (error) {
             console.log('error', error);
-            throw new Error('Failed to delete your nameSpace');// 抛出异常，提示获取数据失败
+            throw new Error('Failed to delete your namespace: "'+ role+'"');// 抛出异常，提示获取数据失败
         }
-        };
-        
+    };
 }
 async function DocumentCreat(record:PiRecord):Promise<Document[]>
 {
