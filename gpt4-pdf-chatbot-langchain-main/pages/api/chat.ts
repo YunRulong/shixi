@@ -11,6 +11,7 @@ import type { QueryVector } from '../../node_modules/@pinecone-database/pinecone
 import { resolve } from 'path';
 import { Database, Regex } from 'lucide-react';
 import {PiDatabase,PiRecord} from './piDatabase';
+import { randomInt } from 'crypto';
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -24,12 +25,15 @@ export default async function handler(
   console.log('uuid', uuid);
   console.log('question', question);
   ///////////////////////////////////////////////////////////////////////////
-  //PiDatabase.DeleteNameSpace("pdf-test");
+  //PiDatabase.DeleteNameSpace("T");
   //PiDatabase.Creat("ERROR",new PiRecord("湯姆","這是我說的話"));
   //let red: Array<PiRecord>=[];
-  //for(let i=0;i<20;i++){red.push(new PiRecord("湯姆"+i,"這是第"+i+"個我說的話"))}
-  //PiDatabase.BatchCreat("ERROR",red);
+  //let talk: Array<string>=["我向往自由，我要谈恋爱！","热带风味的冰红茶挺好喝的","感觉不如原神","我来自香格里拉","我要呼叫舰队","这句话绝对不是谎言"];
+  //for(let i=0;i<200;i++){red.push(new PiRecord("湯姆"+i,"我是第"+i+"個汤姆，"+talk[randomInt(0,5)]))}
+  //PiDatabase.BatchCreat("TOM",red);
   //PiDatabase.March("ERROR","role").then((name)=>{console.log("ans:\n",name)}).catch((error)=>{console.log(error)});
+  
+  //getPdfName(pinecone_name_space).then((name)=>{console.log(name)}).catch((error)=>{console.log(error)});
   ////////////////////////////////////////////////////////////////////////////
   //only accept post requests
   if (req.method !== 'POST') {
@@ -54,7 +58,7 @@ export default async function handler(
         namespace: pinecone_name_space, //namespace comes from your config folder
       },//為替換UUID,插入中間變量
     );
-    //getPdfName(pinecone_name_space).then((name)=>{console.log(name)}).catch((error)=>{console.log(error)});
+    
     const chain = makeChain(vectorStore);
     //Ask a question using chat history
     const response = await chain.call({
@@ -62,7 +66,7 @@ export default async function handler(
       chat_history: history || [],
     });
 
-
+    //console.log('history', history);
     //console.log('response', response);
     res.status(200).json(response);
   } catch (error: any) {
