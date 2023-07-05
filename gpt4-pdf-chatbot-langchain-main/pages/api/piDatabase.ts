@@ -47,6 +47,7 @@ export class PiDatabase
             queryRequest: quu // 将 QueryRequest 对象赋值给 QueryOperationRequest 的 queryRequest 属性
             };
             const que = await index.query(qu)// 发送查询请求并等待返回结果
+            
             que.results?.map((result) => result.matches?.map((result)=>{
                 if(key==null){
                     if(result.metadata)

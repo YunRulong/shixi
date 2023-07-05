@@ -11,12 +11,18 @@ import type { QueryVector } from '../../node_modules/@pinecone-database/pinecone
 import { resolve } from 'path';
 import { Database, Regex } from 'lucide-react';
 import {PiDatabase,PiRecord} from './piDatabase';
+<<<<<<< Updated upstream
 import { randomInt } from 'crypto';
+=======
+import contextMatch from './DatabaseMod'
+import { error } from 'console';
+>>>>>>> Stashed changes
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
   const { uuid, question, history } = req.body;
+ 
   //聲明pinecone_name_space
   let pinecone_name_space=""
   pinecone_name_space=PINECONE_NAME_SPACE
@@ -36,6 +42,12 @@ export default async function handler(
   //getPdfName(pinecone_name_space).then((name)=>{console.log(name)}).catch((error)=>{console.log(error)});
   ////////////////////////////////////////////////////////////////////////////
   //only accept post requests
+
+  //let UID = 'ERROR'
+  //let TemQs = '请告诉我tom有几个'
+  //contextMatch(TemQs, UID).then((datas) => {console.log("cites:\n", datas)}).catch((error)=> {console.log(error)})
+  //UID是nemespace TemQs是要提取的问题，问题放在前面，空间放后面，把相关的引用使用数组返回
+
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
     return;
@@ -66,8 +78,11 @@ export default async function handler(
       chat_history: history || [],
     });
 
+<<<<<<< Updated upstream
     //console.log('history', history);
     //console.log('response', response);
+=======
+>>>>>>> Stashed changes
     res.status(200).json(response);
   } catch (error: any) {
     console.log('error', error);

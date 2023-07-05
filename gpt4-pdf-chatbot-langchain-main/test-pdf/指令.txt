@@ -1,6 +1,6 @@
 yarn run ingest 語料上傳
 
-yarn run dev 啓動對話系統（http://localhost:3000）//調試運行
+yarn run dev //啓動對話系統（http://localhost:3000）//調試運行
 
 yarn run build //生成
 
