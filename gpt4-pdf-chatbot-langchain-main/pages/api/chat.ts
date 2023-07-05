@@ -11,6 +11,7 @@ import type { QueryVector } from '../../node_modules/@pinecone-database/pinecone
 import { resolve } from 'path';
 import { Database, Regex } from 'lucide-react';
 import {PiDatabase,PiRecord} from './piDatabase';
+import contextMatch from './DatabaseMod.js';
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -31,6 +32,13 @@ export default async function handler(
   //PiDatabase.BatchCreat("ERROR",red);
   //PiDatabase.March("ERROR","role").then((name)=>{console.log("ans:\n",name)}).catch((error)=>{console.log(error)});
   ////////////////////////////////////////////////////////////////////////////
+
+  //let UID = 'ERROR'
+  //let TemQs = 'tom有几个'
+  //contextMatch(TemQs, UID).then((name)=>{console.log("cite:\n",name)}).catch((error)=>{console.log(error)});
+  
+
+
   //only accept post requests
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
