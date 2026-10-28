@@ -6,7 +6,6 @@ import { CustomPDFLoader } from '@/utils/customPDFLoader';
 import { PINECONE_INDEX_NAME, PINECONE_NAME_SPACE } from '@/config/pinecone';
 import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
 /* Name of directory to retrieve your files from */
-//這裏添加一個用來劃分上傳pdf的程序，按組長要求，放在根目錄裏
 
 const filePath = 'docs';
 

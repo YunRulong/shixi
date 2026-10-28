@@ -81,7 +81,7 @@ export default function Home() {
       });
       const data = await response.json();
       console.log('data', data);
-      alert(JSON.stringify(history))
+      //alert(JSON.stringify(history))
       if (data.error) {
         setError(data.error);
       } else {
