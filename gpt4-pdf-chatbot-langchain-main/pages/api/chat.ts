@@ -108,8 +108,10 @@ export const getPdfName = async (uuid:string,datas: Array<string>=[]):Promise<Ar
             datas.push(result.metadata.source); // 将结果中的 metadata.source 字段的值加入 datas 数组
     }))
     const tdata:Array<string>=[]
+
     datas.map((na)=>{tdata.push(na.split(new RegExp('\\\\|/'))[na.split(new RegExp('\\\\|/')).length-1]);})// 提取路径中的文件名，并将文件名添加到 tdata 数组
     datas=tdata;// 将 tdata 赋值给 datas 数组
+
     //console.log('response', response);
   } catch (error) {
     console.log('error', error);
